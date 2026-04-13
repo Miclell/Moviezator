@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <Folder Include="Entities\"/>
-        <Folder Include="Enums\"/>
-        <Folder Include="Exceptions\"/>
-        <Folder Include="ValueObjects\"/>
+      <PackageReference Include="JetBrains.Annotations" />
     </ItemGroup>
 </Project>

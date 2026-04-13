@@ -1,4 +1,5 @@
 ﻿using Application.Common.Exceptions;
+using Core.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -15,9 +16,9 @@ public partial class GlobalExceptionHandler(
     {
         var (statusCode, title) = exception switch
         {
+            DomainException e               => (StatusCodes.Status400BadRequest, e.Message),
             NotFoundException e             => (StatusCodes.Status404NotFound, e.Message),
             ConflictException e             => (StatusCodes.Status409Conflict, e.Message),
-            UnauthorizedAccessException e   => (StatusCodes.Status403Forbidden, e.Message),
             ValidationException e           => (StatusCodes.Status400BadRequest, e.Message),
             _ => (StatusCodes.Status500InternalServerError, "Internal server error")
         };
