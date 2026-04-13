@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Scriban" PrivateAssets="all"/>
+    <PackageReference Include="Mediator.Abstractions"/>
+    <PackageReference Include="Mediator.SourceGenerator">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Mapster"/>
+    <PackageReference Include="Mapster.DependencyInjection"/>
+    <PackageReference Include="FluentValidation"/>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\Core.Abstractions\Core.Abstractions.csproj"/>
+    <ProjectReference Include="..\Core\Core.csproj"/>
+  </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Features\" />
+    </ItemGroup>
+</Project>

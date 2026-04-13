@@ -1,0 +1,87 @@
+# ARTIFACTS
+**/bin/
+**/obj/
+**/--db-type
+
+# .NET
+.dotnet/
+.dotnet-home/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# RIDER
+.idea/
+*.DotSettings.user
+/_ReSharper.Caches/
+
+# VS
+.vs/
+*.rsuser
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# LOGS
+*.log
+logs/
+
+# NUGET
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+packages/
+
+# NUKE
+.nuke/temp/
+.nuke/parameters.json
+/output/
+/temp/
+
+# DOCKER
+docker-compose.override.yml
+
+# ENVIROMENT
+.env
+.env.local
+.env.*.local
+**/appsettings.local.json
+**/appsettings.Development.json
+
+# COVERAGE
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# DB ARTIFACTS
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+identifier.sqlite
+
+# SM
+kanban/
+
+# AI
+.auto-claude/
+CLAUDE.MD
+
+# NODE
+node_modules/
+*.local
+dist/
+dist-ssr/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*

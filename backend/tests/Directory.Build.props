@@ -1,0 +1,29 @@
+﻿<Project>
+  <!-- IMPORT ROOT -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove(
+      'Directory.Build.props',
+      '$(MSBuildThisFileDirectory)../'))"
+  />
+
+  <!-- BASE -->
+  <PropertyGroup>
+    <IsPublishable>false</IsPublishable>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
+  </PropertyGroup>
+
+  <!-- FRAMEWORK -->
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <!-- COVERAGE -->
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

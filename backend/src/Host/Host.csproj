@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Serilog"/>
+    <PackageReference Include="Serilog.AspNetCore"/>
+    <PackageReference Include="Serilog.Sinks.Console"/>
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry"/>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql"/>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger"/>
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen"/>
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api\Api.csproj"/>
+    <ProjectReference Include="..\Persistence\Persistence.csproj"/>
+    <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.Development.json"/>
+    <None Include="appsettings.json"/>
+    <None Include="Properties\launchSettings.json"/>
+  </ItemGroup>
+</Project>
