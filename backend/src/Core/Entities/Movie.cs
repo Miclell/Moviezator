@@ -36,7 +36,7 @@ public sealed class Movie : EntityBase<Guid>
     public MovieStatus Status { get; private set; }
     public DateTime? Year { get; private set; }
     public string[] Genres { get; private set; } = [];
-    public string Notes { get; private set; } = null!;
+    public string Notes { get; private set; } = string.Empty;
     public Rating? Rating { get; private set; }
     public DateTime? WatchedDate { get; private set; }
 
