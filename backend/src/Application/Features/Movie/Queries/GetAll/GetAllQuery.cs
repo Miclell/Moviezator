@@ -1,4 +1,4 @@
-﻿using Contracts.V1.Responses;
+﻿using Contracts.V1.Movie.Responses;
 using Mediator;
 using SharedComponents.Results;
 

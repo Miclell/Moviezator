@@ -1,4 +1,4 @@
-﻿namespace Contracts.V1.Requests;
+﻿namespace Contracts.V1.Movie.Requests;
 
 public record GetMoviesRequest(
     int Limit,

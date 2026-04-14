@@ -1,5 +1,4 @@
 using Application.Common.Exceptions;
-using Application.Features.Movie.Commands.Update;
 using Core.Abstractions.Interfaces.Persistence.Repositories;
 using Mediator;
 

@@ -1,4 +1,4 @@
-using Contracts.V1.Responses;
+using Contracts.V1.Movie.Responses;
 using Core.Abstractions.DTOs.Requests;
 using Core.Abstractions.Interfaces.Persistence.Repositories;
 using Mapster;
