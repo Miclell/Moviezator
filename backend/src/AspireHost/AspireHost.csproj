@@ -1,20 +1,20 @@
 <Project Sdk="Aspire.AppHost.Sdk/13.1.2">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <AssemblyName>Moviezator.AspireHost</AssemblyName>
-        <UserSecretsId>4e3ebca1-3b93-4f33-8777-e4b335de7606</UserSecretsId>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Moviezator.AspireHost</AssemblyName>
+    <UserSecretsId>4e3ebca1-3b93-4f33-8777-e4b335de7606</UserSecretsId>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost"/>
-        <PackageReference Include="Aspire.Hosting.PostgreSQL"/>
-        <PackageReference Include="Serilog.AspNetCore"/>
-        <PackageReference Include="Serilog.Sinks.Console"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost"/>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL"/>
+    <PackageReference Include="Serilog.AspNetCore"/>
+    <PackageReference Include="Serilog.Sinks.Console"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Host\Host.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Host\Host.csproj"/>
+  </ItemGroup>
 
 </Project>

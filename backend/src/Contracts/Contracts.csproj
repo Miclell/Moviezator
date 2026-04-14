@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <Folder Include="V1\Movie\" />
+    <Folder Include="V1\Movie\"/>
   </ItemGroup>
 </Project>

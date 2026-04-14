@@ -15,14 +15,15 @@ public sealed class UpdateCommandValidator : AbstractValidator<UpdateCommand>
             .MaximumLength(256);
 
         RuleFor(x => x.Status)
+            .Cascade(CascadeMode.Stop)
+            .NotNull()
             .Must(BeDefinedMovieStatus)
             .WithMessage("Unknown movie status");
 
         RuleFor(x => x.Genres)
             .Cascade(CascadeMode.Stop)
-            .NotNull()
-            .Must(genres => genres.Length > 0 && genres.All(genre => !string.IsNullOrWhiteSpace(genre)))
-            .WithMessage("Genres must contain at least one non-empty value");
+            .Must(genres => genres is null || genres.All(genre => !string.IsNullOrWhiteSpace(genre)))
+            .WithMessage("Genres cannot contain empty values");
 
         RuleFor(x => x.Rating)
             .InclusiveBetween(0, 10)
@@ -45,6 +46,8 @@ public sealed class UpdateCommandValidator : AbstractValidator<UpdateCommand>
             .MaximumLength(4096);
     }
 
-    private static bool BeDefinedMovieStatus(int status) =>
-        Enum.IsDefined((MovieStatus)status);
+    private static bool BeDefinedMovieStatus(int? status)
+    {
+        return status.HasValue && Enum.IsDefined(typeof(MovieStatus), status.Value);
+    }
 }

@@ -1,35 +1,35 @@
 <Solution>
     <Folder Name="/Solution items/">
-        <File Path=".editorconfig" />
-        <File Path=".gitignore" />
-        <File Path="Directory.Build.props" />
-        <File Path="Directory.Build.targets" />
-        <File Path="Directory.Packages.props" />
-        <File Path="global.json" />
-        <File Path="README.MD" />
+        <File Path=".editorconfig"/>
+        <File Path=".gitignore"/>
+        <File Path="Directory.Build.props"/>
+        <File Path="Directory.Build.targets"/>
+        <File Path="Directory.Packages.props"/>
+        <File Path="global.json"/>
+        <File Path="README.MD"/>
     </Folder>
 
-    <Folder Name="/frontend/" />
-    <Folder Name="/frontend/src/" />
+    <Folder Name="/frontend/"/>
+    <Folder Name="/frontend/src/"/>
 
     <Folder Name="/backend/src/Aspire/">
-        <Project Path="backend/src/AspireHost/AspireHost.csproj" />
-        <Project Path="backend/src/ServiceDefaults/ServiceDefaults.csproj" />
+        <Project Path="backend/src/AspireHost/AspireHost.csproj"/>
+        <Project Path="backend/src/ServiceDefaults/ServiceDefaults.csproj"/>
     </Folder>
 
     <Folder Name="/backend/tests/">
-        <File Path="backend/tests/Directory.Build.props" />
+        <File Path="backend/tests/Directory.Build.props"/>
     </Folder>
-    <Folder Name="/backend/" />
+    <Folder Name="/backend/"/>
 
     <Folder Name="/backend/src/">
-        <Project Path="backend/src/Api/Api.csproj" />
-        <Project Path="backend/src/Application/Application.csproj" />
-        <Project Path="backend/src/Contracts/Contracts.csproj" />
-        <Project Path="backend/src/Core.Abstractions/Core.Abstractions.csproj" />
-        <Project Path="backend/src/Core/Core.csproj" />
-        <Project Path="backend/src/Host/Host.csproj" />
-        <Project Path="backend/src/Persistence/Persistence.csproj" />
-        <Project Path="backend/src/SharedComponents/SharedComponents.csproj" />
+        <Project Path="backend/src/Api/Api.csproj"/>
+        <Project Path="backend/src/Application/Application.csproj"/>
+        <Project Path="backend/src/Contracts/Contracts.csproj"/>
+        <Project Path="backend/src/Core.Abstractions/Core.Abstractions.csproj"/>
+        <Project Path="backend/src/Core/Core.csproj"/>
+        <Project Path="backend/src/Host/Host.csproj"/>
+        <Project Path="backend/src/Persistence/Persistence.csproj"/>
+        <Project Path="backend/src/SharedComponents/SharedComponents.csproj"/>
     </Folder>
 </Solution>

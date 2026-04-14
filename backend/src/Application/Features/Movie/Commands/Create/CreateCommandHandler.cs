@@ -9,21 +9,27 @@ public sealed class CreateCommandHandler(IMovieRepository movieRepository) : ICo
 {
     public async ValueTask<Unit> Handle(CreateCommand command, CancellationToken cancellationToken)
     {
-        var movie = (MovieStatus)command.Status switch
+        if (command.Status is not { } status)
+            throw new ArgumentException("Movie status is required.", nameof(command));
+
+        var genres = command.Genres ?? [];
+        var notes = command.Notes ?? string.Empty;
+
+        var movie = (MovieStatus)status switch
         {
             MovieStatus.Watched => Core.Entities.Movie.CreateWatched(
                 command.Title,
                 command.Year,
-                command.Genres,
-                command.Notes,
+                genres,
+                notes,
                 command.Rating.HasValue ? new Rating(command.Rating.Value) : null,
                 command.WatchedDate),
             MovieStatus.ToWatch => Core.Entities.Movie.CreateToWatch(
                 command.Title,
                 command.Year,
-                command.Genres,
-                command.Notes),
-            _ => throw new ArgumentOutOfRangeException(nameof(command), command.Status, "Unknown movie status")
+                genres,
+                notes),
+            _ => throw new ArgumentOutOfRangeException(nameof(command), status, "Unknown movie status")
         };
 
         await movieRepository.InsertAsync(movie, cancellationToken);

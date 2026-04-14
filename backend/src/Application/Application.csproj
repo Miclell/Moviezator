@@ -13,12 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\Contracts.csproj"/>
     <ProjectReference Include="..\Core.Abstractions\Core.Abstractions.csproj"/>
     <ProjectReference Include="..\Core\Core.csproj"/>
   </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Features\Movie\Queries\Get\" />
-    </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Movie\Queries\Get\"/>
+  </ItemGroup>
 </Project>

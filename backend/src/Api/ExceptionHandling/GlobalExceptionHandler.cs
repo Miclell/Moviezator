@@ -9,17 +9,17 @@ using Microsoft.Extensions.Logging;
 namespace Api.ExceptionHandling;
 
 public partial class GlobalExceptionHandler(
-    ILogger <GlobalExceptionHandler> logger) : IExceptionHandler
+    ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
         var (statusCode, title) = exception switch
         {
-            DomainException e               => (StatusCodes.Status400BadRequest, e.Message),
-            NotFoundException e             => (StatusCodes.Status404NotFound, e.Message),
-            ConflictException e             => (StatusCodes.Status409Conflict, e.Message),
-            ValidationException e           => (StatusCodes.Status400BadRequest, e.Message),
+            DomainException e => (StatusCodes.Status400BadRequest, e.Message),
+            NotFoundException e => (StatusCodes.Status404NotFound, e.Message),
+            ConflictException e => (StatusCodes.Status409Conflict, e.Message),
+            ValidationException e => (StatusCodes.Status400BadRequest, e.Message),
             _ => (StatusCodes.Status500InternalServerError, "Internal server error")
         };
 
@@ -40,8 +40,10 @@ public partial class GlobalExceptionHandler(
     }
 
     [LoggerMessage(LogLevel.Error, "Unhandled exception mapped to status code {statusCode}")]
-    static partial void LogUnhandledExceptionMappedToStatusCodeStatuscode(ILogger<GlobalExceptionHandler> logger, int statusCode);
+    static partial void LogUnhandledExceptionMappedToStatusCodeStatuscode(ILogger<GlobalExceptionHandler> logger,
+        int statusCode);
 
     [LoggerMessage(LogLevel.Warning, "Handled exception mapped to status code {statusCode}")]
-    static partial void LogHandledExceptionMappedToStatusCodeStatuscode(ILogger<GlobalExceptionHandler> logger, int statusCode);
+    static partial void LogHandledExceptionMappedToStatusCodeStatuscode(ILogger<GlobalExceptionHandler> logger,
+        int statusCode);
 }

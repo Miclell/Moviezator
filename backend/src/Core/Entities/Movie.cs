@@ -9,7 +9,9 @@ namespace Core.Entities;
 public sealed class Movie : EntityBase<Guid>
 {
     [UsedImplicitly]
-    private Movie() { }
+    private Movie()
+    {
+    }
 
     private Movie(
         string title,
@@ -44,8 +46,10 @@ public sealed class Movie : EntityBase<Guid>
         string title,
         DateTime? year,
         string[] genres,
-        string notes) =>
-        new(title, MovieStatus.ToWatch, year, genres, notes, null, null);
+        string notes)
+    {
+        return new Movie(title, MovieStatus.ToWatch, year, genres, notes, null, null);
+    }
 
     public static Movie CreateWatched(
         string title,
@@ -53,8 +57,10 @@ public sealed class Movie : EntityBase<Guid>
         string[] genres,
         string notes,
         Rating? rating,
-        DateTime? watchedDate) =>
-        new(title, MovieStatus.Watched, year, genres, notes, rating, watchedDate);
+        DateTime? watchedDate)
+    {
+        return new Movie(title, MovieStatus.Watched, year, genres, notes, rating, watchedDate);
+    }
 
     public void UpdateDetails(
         string title,

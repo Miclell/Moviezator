@@ -29,7 +29,8 @@ public sealed class MovieController(
     }
 
     [HttpGet("all")]
-    public async Task<ActionResult<CursorPage<MoviesResponse>>> GetAll([FromQuery] GetMoviesRequest request, CancellationToken ct = default)
+    public async Task<ActionResult<CursorPage<MoviesResponse>>> GetAll([FromQuery] GetMoviesRequest request,
+        CancellationToken ct = default)
     {
         var query = request.Adapt<GetAllQuery>();
         var response = await mediator.Send(query, ct);
@@ -38,7 +39,8 @@ public sealed class MovieController(
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateMovieRequest request, CancellationToken ct = default)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateMovieRequest request,
+        CancellationToken ct = default)
     {
         var command = new UpdateCommand(
             id,
@@ -56,7 +58,8 @@ public sealed class MovieController(
     }
 
     [HttpPut("{id:guid}/watched")]
-    public async Task<IActionResult> MarkAsWatched(Guid id, [FromBody] MarkAsWatchedMovieRequest request, CancellationToken ct = default)
+    public async Task<IActionResult> MarkAsWatched(Guid id, [FromBody] MarkAsWatchedMovieRequest request,
+        CancellationToken ct = default)
     {
         var command = new MarkAsWatchedCommand(id, request.Rating, request.WatchedDate);
         await mediator.Send(command, ct);

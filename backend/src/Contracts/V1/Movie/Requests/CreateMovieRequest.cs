@@ -2,9 +2,9 @@
 
 public record CreateMovieRequest(
     string Title,
-    int Status,
+    int? Status,
     DateTime? Year,
-    string[] Genres,
-    string Notes,
+    string[]? Genres,
+    string? Notes,
     decimal? Rating,
     DateTime? WatchedDate);

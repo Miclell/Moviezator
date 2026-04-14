@@ -1,5 +1,4 @@
-﻿using Core.Abstractions.Interfaces.Persistence;
-using Core.Abstractions.Interfaces.Persistence.Repositories.Common;
+﻿using Core.Abstractions.Interfaces.Persistence.Repositories.Common;
 using Core.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,12 +14,12 @@ public abstract class DefaultRepository<TEntity, TId>(
 
     public async Task<TEntity?> GetByIdAsync(TId id, CancellationToken ct = default)
     {
-        return await Set.FindAsync([id], cancellationToken: ct);
+        return await Set.FindAsync([id], ct);
     }
 
     public async Task InsertAsync(TEntity entity, CancellationToken ct = default)
     {
-        await Set.AddAsync(entity, cancellationToken: ct);
+        await Set.AddAsync(entity, ct);
         await Context.SaveChangesAsync(ct);
     }
 

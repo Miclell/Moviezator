@@ -9,10 +9,10 @@ using SharedComponents.Results;
 
 namespace Persistence.Repositories;
 
-public sealed class MovieRepository(DbSet<Movie> set, AppDbContext context)
-    : DefaultRepository<Movie, Guid>(set, context), IMovieRepository
+public sealed class MovieRepository(AppDbContext context)
+    : DefaultRepository<Movie, Guid>(context.Movies, context), IMovieRepository
 {
-    private readonly DbSet<Movie> _set = set;
+    private readonly DbSet<Movie> _set = context.Movies;
 
     public async Task<CursorPage<BaseMovieDto>> GetAllAsync(GetMoviesQueryDto queryDto, CancellationToken ct = default)
     {
@@ -43,15 +43,17 @@ public sealed class MovieRepository(DbSet<Movie> set, AppDbContext context)
             nextCursor = EntityCursor.Create(lastItem.Id, lastItem.CreatedAt);
 
         return new CursorPage<BaseMovieDto>(
-            [.. nextPage.Select(m => new BaseMovieDto(
-                m.Id,
-                m.Title,
-                m.Status,
-                m.Year,
-                m.Genres,
-                m.Notes,
-                m.Rating,
-                m.WatchedDate))],
+            [
+                .. nextPage.Select(m => new BaseMovieDto(
+                    m.Id,
+                    m.Title,
+                    m.Status,
+                    m.Year,
+                    m.Genres,
+                    m.Notes,
+                    m.Rating,
+                    m.WatchedDate))
+            ],
             nextCursor?.Encode(),
             hasMore);
     }
