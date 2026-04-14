@@ -19,6 +19,6 @@
   </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Features\" />
+        <Folder Include="Features\Movie\Queries\Get\" />
     </ItemGroup>
 </Project>
