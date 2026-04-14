@@ -6,7 +6,14 @@ public static class SwaggerConfiguration
 {
     public static IServiceCollection AddSwaggerDocs(this IServiceCollection services)
     {
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Moviezator API",
+                Version = "v1"
+            });
+        });
 
         return services;
     }
