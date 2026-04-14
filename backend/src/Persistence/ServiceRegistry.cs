@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Abstractions.Interfaces.Persistence.Repositories;
+using Core.Abstractions.Interfaces.Persistence.Repositories.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+using Persistence.Repositories;
+using Persistence.Repositories.Common;
 
 namespace Persistence;
 
@@ -20,9 +24,8 @@ public static class ServiceRegistry
         services.AddDbContext<AppDbContext>((sp, options) =>
             options.UseNpgsql(sp.GetRequiredService<NpgsqlDataSource>()));
 
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-        // repo
+        // Repositories
+        services.AddScoped<IMovieRepository, MovieRepository>();
 
         return services;
     }
