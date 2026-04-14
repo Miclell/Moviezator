@@ -23,7 +23,7 @@ internal static class HostProjectConfiguration
                 DevelopmentDefaults.FrontendProjectName,
                 "../../../frontend",
                 "start")
-            .WithNpm(install: true, installCommand: "ci")
+            .WithNpm(true, "ci")
             .WithHttpEndpoint(targetPort: 5001, port: 5001, isProxied: false)
             .WithEnvironment("API_TARGET", host.GetEndpoint("http"))
             .WaitFor(host);

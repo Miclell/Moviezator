@@ -7,8 +7,10 @@ internal static class AppDbContextDesignTimeConnectionStringResolver
     public static string Resolve(string[] args)
     {
         var connectionString = GetConnectionStringFromArgs(args)
-                               ?? Environment.GetEnvironmentVariable($"ConnectionStrings__{DatabaseOptions.ConnectionStringName}")
-                               ?? Environment.GetEnvironmentVariable($"ConnectionStrings:{DatabaseOptions.ConnectionStringName}")
+                               ?? Environment.GetEnvironmentVariable(
+                                   $"ConnectionStrings__{DatabaseOptions.ConnectionStringName}")
+                               ?? Environment.GetEnvironmentVariable(
+                                   $"ConnectionStrings:{DatabaseOptions.ConnectionStringName}")
                                ?? Environment.GetEnvironmentVariable(DatabaseOptions.ConnectionStringName)
                                ?? GetConnectionStringFromHostSettings();
 
@@ -84,9 +86,7 @@ internal static class AppDbContextDesignTimeConnectionStringResolver
         if (!document.RootElement.TryGetProperty("ConnectionStrings", out var connectionStrings) ||
             !connectionStrings.TryGetProperty(DatabaseOptions.ConnectionStringName, out var connectionString) ||
             connectionString.ValueKind != JsonValueKind.String)
-        {
             return null;
-        }
 
         return connectionString.GetString();
     }

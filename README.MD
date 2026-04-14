@@ -1,6 +1,8 @@
 # Moviezator
 
-Moviezator - небольшой overhead-проект для ведения списка фильмов. Домен простой, но проект намеренно разнесён по слоям и инфраструктуре: API, application layer, contracts, persistence, миграционный сервис, Aspire AppHost и отдельный Angular frontend.
+Moviezator - небольшой overhead-проект для ведения списка фильмов. Домен простой, но проект намеренно разнесён по слоям
+и инфраструктуре: API, application layer, contracts, persistence, миграционный сервис, Aspire AppHost и отдельный
+Angular frontend.
 
 ## Компоненты
 
@@ -30,7 +32,8 @@ Aspire поднимает:
 - backend `Host`, который ждёт успешного завершения миграций;
 - Angular frontend на `http://127.0.0.1:5001/`.
 
-Frontend проксирует запросы `/api` в backend. При запуске через Aspire адрес backend передаётся через `API_TARGET`. При ручном запуске frontend использует fallback `http://localhost:5000`.
+Frontend проксирует запросы `/api` в backend. При запуске через Aspire адрес backend передаётся через `API_TARGET`. При
+ручном запуске frontend использует fallback `http://localhost:5000`.
 
 ## Ручной Запуск
 
