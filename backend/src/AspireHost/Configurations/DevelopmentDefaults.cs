@@ -3,6 +3,7 @@ namespace AspireHost.Configurations;
 internal static class DevelopmentDefaults
 {
     internal const string HostProjectName = "host";
+    internal const string FrontendProjectName = "frontend";
     internal const string MigrationServiceProjectName = "migrations";
 
     internal const string PostgresServerName = "postgres";

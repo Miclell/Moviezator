@@ -72,10 +72,12 @@ kanban/
 
 # AI
 .auto-claude/
+.playwright-mcp/
 CLAUDE.MD
 
 # NODE
 node_modules/
+.angular/
 *.local
 dist/
 dist-ssr/
