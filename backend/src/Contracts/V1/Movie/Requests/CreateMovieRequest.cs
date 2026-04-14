@@ -1,7 +1,6 @@
-namespace Contracts.V1.Responses;
+﻿namespace Contracts.V1.Movie.Requests;
 
-public sealed record MoviesResponse(
-    Guid Id,
+public record CreateMovieRequest(
     string Title,
     int Status,
     DateTime? Year,
