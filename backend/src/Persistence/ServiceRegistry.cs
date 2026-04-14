@@ -3,7 +3,10 @@ using Core.Abstractions.Interfaces.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Npgsql;
+using Persistence.Options;
+using Persistence.Options.Validators;
 using Persistence.Repositories;
 using Persistence.Repositories.Common;
 
@@ -15,17 +18,35 @@ public static class ServiceRegistry
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration
-                                   .GetConnectionString("DefaultConnection") ??
-                               throw new InvalidOperationException("Connection string is not configured");
+        services.AddAppDbContext(configuration);
 
-        services.AddSingleton(NpgsqlDataSource.Create(connectionString));
+        services.AddScoped<IMovieRepository, MovieRepository>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddAppDbContext(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        services.AddOptions<DatabaseOptions>()
+            .Configure(options =>
+            {
+                var databaseOptions = DatabaseOptions.FromConfiguration(configuration);
+                options.ConnectionString = databaseOptions.ConnectionString;
+            })
+            .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<DatabaseOptions>, DatabaseOptionsValidator>();
+
+        services.AddSingleton(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<DatabaseOptions>>().Value;
+            return NpgsqlDataSource.Create(options.ConnectionString);
+        });
 
         services.AddDbContext<AppDbContext>((sp, options) =>
-            options.UseNpgsql(sp.GetRequiredService<NpgsqlDataSource>()));
-
-        // Repositories
-        services.AddScoped<IMovieRepository, MovieRepository>();
+            options.UseAppDatabase(sp.GetRequiredService<NpgsqlDataSource>()));
 
         return services;
     }

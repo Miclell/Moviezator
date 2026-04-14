@@ -29,6 +29,7 @@
         <Project Path="backend/src/Core.Abstractions/Core.Abstractions.csproj"/>
         <Project Path="backend/src/Core/Core.csproj"/>
         <Project Path="backend/src/Host/Host.csproj"/>
+        <Project Path="backend/src/MigrationService/MigrationService.csproj"/>
         <Project Path="backend/src/Persistence/Persistence.csproj"/>
         <Project Path="backend/src/SharedComponents/SharedComponents.csproj"/>
     </Folder>

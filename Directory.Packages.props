@@ -73,7 +73,7 @@
   </ItemGroup>
   <!-- Aspire -->
   <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.1.2"/>
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.2.2"/>
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.3.0"/>
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.3.0"/>
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.15.0"/>

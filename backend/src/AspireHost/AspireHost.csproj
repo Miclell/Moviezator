@@ -1,4 +1,4 @@
-<Project Sdk="Aspire.AppHost.Sdk/13.1.2">
+<Project Sdk="Aspire.AppHost.Sdk/13.2.2">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Host\Host.csproj"/>
+    <ProjectReference Include="..\MigrationService\MigrationService.csproj"/>
   </ItemGroup>
 
 </Project>

@@ -2,16 +2,17 @@ using Core.Entities;
 using Core.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Persistence.Configurations.Common;
 
 namespace Persistence.Configurations;
 
-internal sealed class MovieConfiguration : IEntityTypeConfiguration<Movie>
+internal sealed class MovieConfiguration : EntityBaseConfiguration<Movie, Guid>
 {
-    public void Configure(EntityTypeBuilder<Movie> builder)
+    public override void Configure(EntityTypeBuilder<Movie> builder)
     {
         builder.ToTable("Movies");
 
-        builder.HasKey(movie => movie.Id);
+        base.Configure(builder);
 
         builder.Property(movie => movie.Title)
             .HasMaxLength(256)
@@ -36,9 +37,5 @@ internal sealed class MovieConfiguration : IEntityTypeConfiguration<Movie>
             .HasPrecision(3, 1);
 
         builder.Property(movie => movie.WatchedDate);
-
-        builder.Property(movie => movie.CreatedAt);
-
-        builder.Property(movie => movie.UpdatedAt);
     }
 }
