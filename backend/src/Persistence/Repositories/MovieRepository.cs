@@ -1,9 +1,10 @@
-﻿using Core.Abstractions.DTOs.Requests;
+using Core.Abstractions.DTOs.Requests;
 using Core.Abstractions.DTOs.Responses;
 using Core.Abstractions.Interfaces.Persistence.Repositories;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Common.Cursor;
+using Persistence.Common.Cursor.DTOs;
+using Persistence.Common.Cursor.Extensions;
 using Persistence.Repositories.Common;
 using SharedComponents.Results;
 
@@ -16,35 +17,13 @@ public sealed class MovieRepository(AppDbContext context)
 
     public async Task<CursorPage<BaseMovieDto>> GetAllAsync(GetMoviesQueryDto queryDto, CancellationToken ct = default)
     {
-        var query = _set
-            .OrderBy(m => m.CreatedAt)
-            .ThenBy(m => m.Id)
-            .AsNoTracking();
-
-        if (!string.IsNullOrWhiteSpace(queryDto.Cursor))
-        {
-            var (lastId, date) = EntityCursor.Decode(queryDto.Cursor);
-
-            query = query.Where(m =>
-                m.CreatedAt > date ||
-                (m.CreatedAt == date && m.Id > lastId));
-        }
-
-        var nextPage = await query.Take(queryDto.Limit + 1).ToListAsync(ct);
-
-        var hasMore = nextPage.Count > queryDto.Limit;
-
-        if (hasMore)
-            nextPage.RemoveAt(nextPage.Count - 1);
-
-        EntityCursor? nextCursor = null;
-        var lastItem = nextPage.LastOrDefault();
-        if (lastItem is not null && hasMore)
-            nextCursor = EntityCursor.Create(lastItem.Id, lastItem.CreatedAt);
-
-        return new CursorPage<BaseMovieDto>(
-            [
-                .. nextPage.Select(m => new BaseMovieDto(
+        var rows = await _set
+            .AsNoTracking()
+            .ApplyCursor<Movie, Guid>(queryDto.Cursor)
+            .Select(m => new CursorPageRow<Guid, BaseMovieDto>(
+                m.Id,
+                m.CreatedAt,
+                new BaseMovieDto(
                     m.Id,
                     m.Title,
                     m.Status,
@@ -52,9 +31,10 @@ public sealed class MovieRepository(AppDbContext context)
                     m.Genres,
                     m.Notes,
                     m.Rating,
-                    m.WatchedDate))
-            ],
-            nextCursor?.Encode(),
-            hasMore);
+                    m.WatchedDate)))
+            .Take(queryDto.Limit + 1)
+            .ToListAsync(ct);
+
+        return rows.ToCursorPage(queryDto.Limit);
     }
 }
