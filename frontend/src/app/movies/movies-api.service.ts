@@ -1,18 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
-import { MoviePayload, MoviesPage } from './movie.models';
+import { MoviePayload, MoviesPage, MoviesQuery } from './movie.models';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = '/api/v1/movies';
 
-  getAll(limit: number, cursor?: string | null) {
-    const params: Record<string, string> = { Limit: limit.toString() };
+  getAll(query: MoviesQuery) {
+    const params: Record<string, string> = {
+      Limit: query.limit.toString(),
+      SortBy: query.sortBy.toString(),
+      SortDirection: query.sortDirection.toString()
+    };
 
-    if (cursor) {
-      params['Cursor'] = cursor;
+    if (query.cursor) {
+      params['Cursor'] = query.cursor;
     }
 
     return this.http.get<MoviesPage>(`${this.baseUrl}/all`, { params });
