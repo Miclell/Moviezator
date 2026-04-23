@@ -1,4 +1,6 @@
 export type MovieStatus = 0 | 1;
+export type MovieSortBy = 0 | 1 | 2;
+export type SortDirection = 0 | 1;
 
 export interface Movie {
   id: string;
@@ -44,4 +46,11 @@ export interface ProblemDetails {
   title?: string;
   detail?: string;
   errors?: Record<string, string[]>;
+}
+
+export interface MoviesQuery {
+  limit: number;
+  cursor?: string | null;
+  sortBy: MovieSortBy;
+  sortDirection: SortDirection;
 }

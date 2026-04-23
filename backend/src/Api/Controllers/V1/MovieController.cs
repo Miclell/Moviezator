@@ -11,6 +11,7 @@ using Mapster;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using SharedComponents.Results;
+using SharedComponents.Results.Cursor;
 
 namespace Api.Controllers.V1;
 

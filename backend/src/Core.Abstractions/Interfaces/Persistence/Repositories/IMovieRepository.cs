@@ -3,6 +3,7 @@ using Core.Abstractions.DTOs.Responses;
 using Core.Abstractions.Interfaces.Persistence.Repositories.Common;
 using Core.Entities;
 using SharedComponents.Results;
+using SharedComponents.Results.Cursor;
 
 namespace Core.Abstractions.Interfaces.Persistence.Repositories;
 

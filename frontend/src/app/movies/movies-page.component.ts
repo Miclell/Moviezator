@@ -3,7 +3,14 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 
-import { Movie, MoviePayload, MovieRow, ProblemDetails } from './movie.models';
+import {
+  Movie,
+  MoviePayload,
+  MovieRow,
+  MovieSortBy,
+  ProblemDetails,
+  SortDirection
+} from './movie.models';
 import { MoviesApiService } from './movies-api.service';
 
 @Component({
@@ -21,6 +28,24 @@ import { MoviesApiService } from './movies-api.service';
           <label>
             Page size
             <input type="number" min="1" max="100" [(ngModel)]="pageSize" (change)="reload()">
+          </label>
+
+          <label>
+            Sort by
+            <select [(ngModel)]="sortBy" (change)="reload()">
+              @for (option of sortOptions; track option.value) {
+                <option [ngValue]="option.value">{{ option.label }}</option>
+              }
+            </select>
+          </label>
+
+          <label>
+            Direction
+            <select [(ngModel)]="sortDirection" (change)="reload()">
+              @for (option of directionOptions; track option.value) {
+                <option [ngValue]="option.value">{{ option.label }}</option>
+              }
+            </select>
           </label>
 
           <button type="button" class="secondary" (click)="reload()" [disabled]="busy()">Refresh</button>
@@ -146,6 +171,17 @@ export class MoviesPageComponent {
   protected readonly notice = signal('');
   protected newRow = this.createEmptyRow(true);
   protected pageSize = 20;
+  protected sortBy: MovieSortBy = 0;
+  protected sortDirection: SortDirection = 0;
+  protected readonly sortOptions: ReadonlyArray<{ value: MovieSortBy; label: string }> = [
+    { value: 0, label: 'Created date' },
+    { value: 1, label: 'Watched date' },
+    { value: 2, label: 'Rating' }
+  ];
+  protected readonly directionOptions: ReadonlyArray<{ value: SortDirection; label: string }> = [
+    { value: 0, label: 'Ascending' },
+    { value: 1, label: 'Descending' }
+  ];
 
   constructor() {
     void this.reload();
@@ -203,7 +239,12 @@ export class MoviesPageComponent {
 
   private async loadRows(cursor: string | null, replace: boolean) {
     await this.run(async () => {
-      const page = await firstValueFrom(this.api.getAll(this.normalizedPageSize(), cursor));
+      const page = await firstValueFrom(this.api.getAll({
+        limit: this.normalizedPageSize(),
+        cursor,
+        sortBy: this.sortBy,
+        sortDirection: this.sortDirection
+      }));
       const rows = (page.items ?? []).map(movie => this.toRow(movie));
 
       this.rows.set(replace ? rows : [...this.rows(), ...rows]);
