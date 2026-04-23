@@ -4,6 +4,7 @@ using Core.Abstractions.Interfaces.Persistence.Repositories;
 using Mapster;
 using Mediator;
 using SharedComponents.Results;
+using SharedComponents.Results.Cursor;
 
 namespace Application.Features.Movie.Queries.GetAll;
 

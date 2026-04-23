@@ -2,6 +2,7 @@ using System.Text.Json;
 using Core.Abstractions.DTOs.Requests;
 using Core.Abstractions.Exceptions;
 using Persistence.Common.Cursor.DTOs;
+using SharedComponents.Results.Ordering;
 
 namespace Persistence.Common.Cursor.Internal.Helpers;
 

@@ -3,6 +3,7 @@ using Core.Abstractions.DTOs.Requests;
 using Core.Common;
 using Persistence.Common.Cursor.DTOs;
 using Persistence.Common.Cursor.Internal.Helpers;
+using SharedComponents.Results.Ordering;
 
 namespace Persistence.Common.Cursor.Extensions;
 

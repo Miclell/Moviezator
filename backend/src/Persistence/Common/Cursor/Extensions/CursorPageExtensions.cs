@@ -1,6 +1,7 @@
 ﻿using Persistence.Common.Cursor.DTOs;
 using Persistence.Common.Cursor.Internal.Helpers;
 using SharedComponents.Results;
+using SharedComponents.Results.Cursor;
 
 namespace Persistence.Common.Cursor.Extensions;
 

@@ -1,5 +1,6 @@
 using Core.Abstractions.DTOs.Requests;
 using Core.Common;
+using SharedComponents.Results.Ordering;
 
 namespace Persistence.Common.Cursor.DTOs;
 
