@@ -35,9 +35,7 @@ internal sealed record EntityCursor<TId, TSortValue>(
             {
                 if (ShouldUseLegacyFallback(cursor, sortDefinition)
                     && TryDecodeLegacy(value, bytes, sortDefinition, out var legacyDecodedCursor))
-                {
                     return legacyDecodedCursor;
-                }
 
                 Validate(cursor, value, sortDefinition);
                 return cursor;
@@ -112,7 +110,8 @@ internal sealed record EntityCursor<TId, TSortValue>(
     private static bool IsLegacyCreatedAtCursor(CursorSortDefinition<TSortValue> sortDefinition)
     {
         return typeof(TSortValue) == typeof(DateTime)
-               && string.Equals(sortDefinition.Key, nameof(Core.Common.ITimestampedEntity.CreatedAt), StringComparison.Ordinal)
+               && string.Equals(sortDefinition.Key, nameof(Core.Common.ITimestampedEntity.CreatedAt),
+                   StringComparison.Ordinal)
                && sortDefinition.Direction == SortDirection.Asc;
     }
 

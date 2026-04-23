@@ -40,7 +40,8 @@ public sealed class MovieRepository(AppDbContext context)
                 m => EF.Property<decimal?>(m, nameof(Movie.Rating)),
                 static m => m.Rating?.Value,
                 ct),
-            _ => throw new ArgumentOutOfRangeException(nameof(queryDto), queryDto.SortBy, "Unsupported movie sort field")
+            _ => throw new ArgumentOutOfRangeException(nameof(queryDto), queryDto.SortBy,
+                "Unsupported movie sort field")
         };
     }
 

@@ -48,17 +48,17 @@ public static class CursorQueryExtensions
         var direction = NormalizeDirection(sortDefinition.Direction);
 
         if (!CanBeNull(typeof(TSortValue)))
-        {
             return direction == SortDirection.Asc
                 ? query.OrderBy(sortValueSelector).ThenBy(e => e.CreatedAt).ThenBy(e => e.Id)
-                : query.OrderByDescending(sortValueSelector).ThenByDescending(e => e.CreatedAt).ThenByDescending(e => e.Id);
-        }
+                : query.OrderByDescending(sortValueSelector).ThenByDescending(e => e.CreatedAt)
+                    .ThenByDescending(e => e.Id);
 
         var isNullSelector = BuildIsNullSelector(sortValueSelector);
 
         return direction == SortDirection.Asc
             ? query.OrderBy(isNullSelector).ThenBy(sortValueSelector).ThenBy(e => e.CreatedAt).ThenBy(e => e.Id)
-            : query.OrderBy(isNullSelector).ThenByDescending(sortValueSelector).ThenByDescending(e => e.CreatedAt).ThenByDescending(e => e.Id);
+            : query.OrderBy(isNullSelector).ThenByDescending(sortValueSelector).ThenByDescending(e => e.CreatedAt)
+                .ThenByDescending(e => e.Id);
     }
 
     private static Expression<Func<TEntity, bool>> BuildCursorPredicate<TEntity, TId, TSortValue>(
@@ -74,9 +74,11 @@ public static class CursorQueryExtensions
         var createdAtBody = Expression.Property(param, nameof(EntityBase<TId>.CreatedAt));
         var sortValueBody = ReplaceParameter(sortValueSelector, param);
 
-        var createdAtComparison = BuildComparison(createdAtBody, Expression.Constant(cursor.CreatedAt), sortDefinition.Direction);
+        var createdAtComparison =
+            BuildComparison(createdAtBody, Expression.Constant(cursor.CreatedAt), sortDefinition.Direction);
         var createdAtEqual = Expression.Equal(createdAtBody, Expression.Constant(cursor.CreatedAt));
-        var idComparison = BuildComparison(idBody, Expression.Constant(cursor.Id, typeof(TId)), sortDefinition.Direction);
+        var idComparison =
+            BuildComparison(idBody, Expression.Constant(cursor.Id, typeof(TId)), sortDefinition.Direction);
 
         Expression tieBreaker = Expression.OrElse(
             createdAtComparison,
@@ -106,7 +108,8 @@ public static class CursorQueryExtensions
         }
 
         var nullableSortValueConstant = Expression.Constant(cursor.SortValue, typeof(TSortValue));
-        var nullableSortValueComparison = BuildComparison(sortValueBody, nullableSortValueConstant, sortDefinition.Direction);
+        var nullableSortValueComparison =
+            BuildComparison(sortValueBody, nullableSortValueConstant, sortDefinition.Direction);
         var nullableSortValueEqual = Expression.Equal(sortValueBody, nullableSortValueConstant);
 
         var bodyWithNullsLast = Expression.OrElse(
@@ -168,7 +171,8 @@ public static class CursorQueryExtensions
         };
     }
 
-    private sealed class ReplaceParameterVisitor(ParameterExpression source, ParameterExpression target) : ExpressionVisitor
+    private sealed class ReplaceParameterVisitor(ParameterExpression source, ParameterExpression target)
+        : ExpressionVisitor
     {
         protected override Expression VisitParameter(ParameterExpression node)
         {
